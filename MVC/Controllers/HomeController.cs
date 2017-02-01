@@ -1,7 +1,9 @@
-﻿using MVC.Models;
+﻿using Model.Common;
+using MVC.Models;
 using Service.Common;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,33 +21,13 @@ namespace MVC.Controllers
             this.noteService = noteService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
-        }
-
-        public async Task<ActionResult> Test()
-        {
-            var notes = await noteService.GetAllAsync();
-            var model = new TestViewModel
+            var model = new NotesViewModel
             {
-                Notes = notes,
+                Notes = await noteService.GetAllAsync(),
             };
             return View(model);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

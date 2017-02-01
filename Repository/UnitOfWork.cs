@@ -18,12 +18,15 @@ namespace Repository
 
         private INotesContext _context;
         private IRepository<INote> _noteRepository;
+        private IRepository<ICategory> _categoryRepository;
 
         public UnitOfWork(INotesContext context, 
-            IRepository<INote> noteRepository)
+            IRepository<INote> noteRepository,
+            IRepository<ICategory> categoryRepository)
         {
             _context = context;
             _noteRepository = noteRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public IRepository<INote> NoteRepository
@@ -31,6 +34,14 @@ namespace Repository
             get
             {
                 return _noteRepository;
+            }
+        }
+
+        public IRepository<ICategory> CategoryRepository
+        {
+            get
+            {
+                return _categoryRepository;
             }
         }
 

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model.Common
 {
-    public interface INote
+    public interface ICategory
     {
         int Id { get; set; }
+        string Name { get; set; }
 
-        string Text { get; set; }
-
-        ICategory Category { get; set; }
+        ICollection<INote> Notes { get; set; }
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Model.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model.Common;
 
 namespace Model
 {
-    public class Note : INote
+    class Category : ICategory
     {
         public int Id { get; set; }
-        public string Text { get; set; }
+        public string Name { get; set; }
 
-        public ICategory Category { get; set; }
+        public ICollection<INote> Notes { get; set; }
     }
 }

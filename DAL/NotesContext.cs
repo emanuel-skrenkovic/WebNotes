@@ -16,5 +16,6 @@ namespace DAL
         }
 
         public DbSet<NoteEntity> Notes { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
     }
 }

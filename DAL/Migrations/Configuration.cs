@@ -20,6 +20,12 @@ namespace DAL.Migrations
                 new NoteEntity { Text = "test" },
                 new NoteEntity { Text = "Test 2" }
                 );
+            context.Categories.AddOrUpdate(
+                new CategoryEntity
+                {
+                    Name = "Category"
+                }
+                );
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

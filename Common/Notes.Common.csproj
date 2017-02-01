@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\CategoryMapperProfile.cs" />
     <Compile Include="Ninject\AutoMapperModule.cs" />
     <Compile Include="Ninject\DalModule.cs" />
     <Compile Include="Ninject\ModelModule.cs" />

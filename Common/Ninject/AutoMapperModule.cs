@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration;
+using Common.AutoMapper;
 using Ninject;
 using Ninject.Modules;
 using System;
@@ -19,6 +20,7 @@ namespace Common.Ninject
                 cfg.ConstructServicesUsing(t => Kernel.Get(t));
 
                 cfg.AddProfile<NoteMapperProfile>();
+                cfg.AddProfile<CategoryMapperProfile>();
             });
         }
     }

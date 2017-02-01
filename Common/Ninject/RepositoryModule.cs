@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Common;
 
 namespace Common
 {
@@ -13,7 +14,8 @@ namespace Common
     {
         public override void Load()
         {
-            Bind(typeof(IRepository<>)).To(typeof(NoteRepository));
+            Bind(typeof(IRepository<INote>)).To(typeof(NoteRepository));
+            Bind(typeof(IRepository<ICategory>)).To(typeof(CategoryRepository));
             Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }

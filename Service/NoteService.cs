@@ -24,22 +24,17 @@ namespace Service
 
         public async Task<INote> GetByIdAsync(int id)
         {
-            var temp = await _repository.GetByIdAsync(id);
-            return AutoMapper.Mapper.Map<INote>(temp);
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task<List<INote>> GetAllAsync()
         {
-            /*var temp = await _repository.GetAllAsync();
-            return new List<INote>(AutoMapper.Mapper.Map<List<INote>>(temp));*/
-
             return await _repository.GetAllAsync();
         }   
 
         public void Update(INote entity)
         {
-            var temp = AutoMapper.Mapper.Map<NoteEntity>(entity);
-            //_repository.Update(temp);
+            _repository.Update(entity);
         }
 
         public async Task Delete(int id)

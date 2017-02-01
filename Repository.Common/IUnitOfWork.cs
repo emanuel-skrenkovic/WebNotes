@@ -12,6 +12,7 @@ namespace Repository.Common
     public interface IUnitOfWork : IDisposable
     {
         IRepository<INote> NoteRepository { get; }
+        IRepository<ICategory> CategoryRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }
