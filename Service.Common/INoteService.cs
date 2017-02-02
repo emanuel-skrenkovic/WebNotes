@@ -1,6 +1,4 @@
-﻿using DAL.Entities;
-using Model;
-using Model.Common;
+﻿using Model.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +9,14 @@ namespace Service.Common
 {
     public interface INoteService
     {
-        Task<INote> GetByIdAsync(int id);
-        Task<List<INote>> GetAllAsync();
-        void Update(INote entity);
-        Task Delete(int id);
+        Task<INote> GetNoteByIdAsync(int id);
+        Task<ICategory> GetCategoryByIdAsync(int id);
+        Task<List<INote>> GetNotesAsync();
+        Task<List<ICategory>> GetCategoriesAsync();
+        void UpdateNote(INote entity);
+        void UpdateCategory(ICategory entity);
+        Task DeleteNote(int id);
+        Task DeleteCategory(int id);
         Task SaveChangesAsync();
     }
 }

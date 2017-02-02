@@ -45,17 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\Notes.DAL.csproj">
-      <Project>{D26A6C71-7F14-4F34-85FA-983DE44770A0}</Project>
-      <Name>Notes.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model.Common\Notes.Model.Common.csproj">
       <Project>{03e68f57-bfaa-4fa2-8119-3d3f95187fe9}</Project>
       <Name>Notes.Model.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Notes.Model.csproj">
-      <Project>{c2f8e260-2c4c-4d68-bf82-2fa1635026ec}</Project>
-      <Name>Notes.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

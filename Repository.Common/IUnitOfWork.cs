@@ -1,6 +1,4 @@
-﻿using DAL.Entities;
-using Model;
-using Model.Common;
+﻿using Model.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

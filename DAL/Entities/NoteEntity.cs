@@ -12,12 +12,10 @@ namespace DAL.Entities
     {
         [Key]
         public int NoteId { get; set; }
-
         public string Text { get; set; }
 
         [ForeignKey("Category")]
         public int? CategoryId { get; set; }
-
         public virtual CategoryEntity Category { get; set; }
     }
 }

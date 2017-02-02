@@ -14,18 +14,19 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
 
-        private INoteService noteService { get; set; }
+        private INoteService _service;
 
-        public HomeController(INoteService noteService)
+        public HomeController(INoteService service)
         {
-            this.noteService = noteService;
+            _service = service;
         }
 
         public async Task<ActionResult> Index()
         {
             var model = new NotesViewModel
             {
-                Notes = await noteService.GetAllAsync(),
+                Notes = await _service.GetNotesAsync(),
+                Categories = await _service.GetCategoriesAsync()
             };
             return View(model);
         }
