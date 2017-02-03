@@ -9,6 +9,7 @@ namespace Model.Common
     public interface INote
     {
         int Id { get; set; }
+        string Title { get; set; }
         string Text { get; set; }
 
         int? CategoryId { get; set; }

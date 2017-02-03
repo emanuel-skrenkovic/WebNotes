@@ -23,12 +23,13 @@ namespace MVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var model = new NotesViewModel
+            var model = new TestViewModel
             {
                 Notes = await _service.GetNotesAsync(),
                 Categories = await _service.GetCategoriesAsync()
             };
+
             return View(model);
-        }
+        } 
     }
 }

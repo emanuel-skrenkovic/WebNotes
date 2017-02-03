@@ -43,14 +43,24 @@ namespace Service
             return await _categoryRepo.GetAllAsync();
         }
 
-        public void UpdateNote(INote entity)
+        public void CreateNote(INote model)
         {
-            _noteRepo.Update(entity);
+            _noteRepo.Create(model);
         }
 
-        public void UpdateCategory(ICategory entity)
+        public void CreateCategory(ICategory model)
         {
-            _categoryRepo.Update(entity);
+            _categoryRepo.Create(model);
+        }
+
+        public void UpdateNote(INote model)
+        {
+            _noteRepo.Update(model);
+        }
+
+        public void UpdateCategory(ICategory model)
+        {
+            _categoryRepo.Update(model);
         }
 
         public async Task DeleteNote(int id)

@@ -17,15 +17,13 @@ namespace DAL.Migrations
         {
 
             context.Notes.AddOrUpdate(
-                new NoteEntity { Text = "test" },
-                new NoteEntity { Text = "Test 2" }
-                );
+                new NoteEntity { Title = "Title", Text = "Text" },
+                new NoteEntity { Title = "Title 2", Text = "Text 2" }
+            );
+
             context.Categories.AddOrUpdate(
-                new CategoryEntity
-                {
-                    Name = "Category"
-                }
-                );
+                new CategoryEntity { Name = "Category" }
+            );
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVC.Models
 {
-    public class NotesViewModel
+    public class TestViewModel
     {
         public IEnumerable<INote> Notes { get; set; }
         public IEnumerable<ICategory> Categories { get; set; }

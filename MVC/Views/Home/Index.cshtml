@@ -1,4 +1,4 @@
-﻿@model MVC.Models.NotesViewModel
+﻿@model MVC.Models.TestViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Notes.FirstOrDefault().Title)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Notes.FirstOrDefault().Text)
         </th>
         <th>
@@ -22,6 +25,9 @@
     @foreach (var item in Model.Notes)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Text)
             </td>
