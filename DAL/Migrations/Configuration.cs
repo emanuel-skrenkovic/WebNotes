@@ -15,15 +15,14 @@ namespace DAL.Migrations
 
         protected override void Seed(DAL.NotesContext context)
         {
-
             context.Notes.AddOrUpdate(
-                new NoteEntity { Title = "Title", Text = "Text" },
-                new NoteEntity { Title = "Title 2", Text = "Text 2" }
-            );
+                new NoteEntity { Title = "Test Title", Text = "Test Text" },
+                new NoteEntity { Title = "Test", Text = "Text" }
+                );
 
             context.Categories.AddOrUpdate(
-                new CategoryEntity { Name = "Category" }
-            );
+                new CategoryEntity { Name = "Test category" }
+                );
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

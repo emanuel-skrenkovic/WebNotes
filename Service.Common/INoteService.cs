@@ -11,14 +11,13 @@ namespace Service.Common
     {
         Task<INote> GetNoteByIdAsync(int id);
         Task<ICategory> GetCategoryByIdAsync(int id);
-        Task<List<INote>> GetNotesAsync();
-        Task<List<ICategory>> GetCategoriesAsync();
-        void CreateNote(INote model);
-        void CreateCategory(ICategory model);
-        void UpdateNote(INote model);
-        void UpdateCategory(ICategory model);
+        Task<IList<INote>> GetNotesAsync();
+        Task<IList<ICategory>> GetCategoriesAsync();
+        Task CreateNote(INote model);
+        Task CreateCategory(ICategory model);
+        Task UpdateNote(INote model);
+        Task UpdateCategory(ICategory model);
         Task DeleteNote(int id);
         Task DeleteCategory(int id);
-        Task SaveChangesAsync();
     }
 }

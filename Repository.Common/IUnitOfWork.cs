@@ -9,8 +9,13 @@ namespace Repository.Common
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<INote> NoteRepository { get; }
-        IRepository<ICategory> CategoryRepository { get; }
-        Task<int> SaveChangesAsync();
+        Task<TEntity> GetByIdAsync<TEntity>(int id) where TEntity : class;
+        Task<IList<TEntity>> GetAllAsync<TEntity>() where TEntity : class;
+
+        void Add<TEntity>(TEntity entity) where TEntity : class;
+        void Update<TEntity>(TEntity entity) where TEntity : class;
+        void Delete<TEntity>(TEntity entity) where TEntity : class;
+
+        Task SaveChangesAsync();
     }
 }

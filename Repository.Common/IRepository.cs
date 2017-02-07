@@ -10,9 +10,9 @@ namespace Repository.Common
     public interface IRepository<TModel> where TModel : class
     {
         Task<TModel> GetByIdAsync(int id);
-        Task<List<TModel>> GetAllAsync();
-        void Create(TModel entity);
-        void Update(TModel entity);
+        Task<IList<TModel>> GetAllAsync();
+        Task Create(TModel entity);
+        Task Update(TModel entity);
         Task Delete(int id);
     }
 }

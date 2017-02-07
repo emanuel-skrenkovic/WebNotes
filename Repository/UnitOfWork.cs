@@ -14,40 +14,43 @@ namespace Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private bool _disposed = false; 
+        private bool _disposed = false;
 
         private INotesContext _context;
-        private IRepository<INote> _noteRepository;
-        private IRepository<ICategory> _categoryRepository;
 
-        public UnitOfWork(INotesContext context, 
-            IRepository<INote> noteRepository,
-            IRepository<ICategory> categoryRepository)
+        public UnitOfWork(INotesContext context)
         {
             _context = context;
-            _noteRepository = noteRepository;
-            _categoryRepository = categoryRepository;
         }
 
-        public IRepository<INote> NoteRepository
+        public async Task<TEntity> GetByIdAsync<TEntity>(int id) where TEntity : class
         {
-            get
-            {
-                return _noteRepository;
-            }
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public IRepository<ICategory> CategoryRepository
+        public async Task<IList<TEntity>> GetAllAsync<TEntity>() where TEntity : class
         {
-            get
-            {
-                return _categoryRepository;
-            }
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<int> SaveChangesAsync()
+        public void Add<TEntity>(TEntity entity) where TEntity : class
         {
-            return await _context.SaveChangesAsync();
+            _context.Set<TEntity>().Add(entity);
+        }
+
+        public void Update<TEntity>(TEntity entity) where TEntity : class
+        {
+            _context.Entry<TEntity>(entity).State = EntityState.Modified;
+        }
+
+        public void Delete<TEntity>(TEntity entity) where TEntity : class
+        {
+            _context.Set<TEntity>().Remove(entity);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()

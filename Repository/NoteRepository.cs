@@ -12,7 +12,7 @@ namespace Repository
 {
     public class NoteRepository : GenericRepository<NoteEntity, INote>, IRepository<INote>
     {
-        public NoteRepository(INotesContext context) : base(context)
+        public NoteRepository(IUnitOfWork uow) : base(uow)
         {
         }   
     }

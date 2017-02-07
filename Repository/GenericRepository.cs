@@ -1,5 +1,4 @@
-﻿using DAL;
-using Repository.Common;
+﻿using Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,43 +13,46 @@ namespace Repository
         where TModel : class
         where TEntity : class
     {
-        private readonly INotesContext _context;
-        private DbSet<TEntity> _set;
+        protected IUnitOfWork _uow;
 
-        public GenericRepository(INotesContext context)
+        public GenericRepository(IUnitOfWork uow)
         {
-            _context = context;
-            _set = _context.Set<TEntity>();
+            _uow = uow;
         }
 
         public async Task<TModel> GetByIdAsync(int id)
         {
-            var result = await _set.FindAsync(id);
+            var result = await _uow.GetByIdAsync<TEntity>(id);
             return AutoMapper.Mapper.Map<TModel>(result);
         }
 
-        public async Task<List<TModel>> GetAllAsync()
+        public async Task<IList<TModel>> GetAllAsync()
         {
-            var result = await _set.ToListAsync();
-            return AutoMapper.Mapper.Map<List<TModel>>(result);
+            var result = await _uow.GetAllAsync<TEntity>();
+            return AutoMapper.Mapper.Map<IList<TModel>>(result);
         }
 
-        public void Create(TModel model)
+        public async Task Create(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
-            _context.Set<TEntity>().Add(result);
+            _uow.Add(result);
+            await _uow.SaveChangesAsync();
         }
 
-        public void Update(TModel model)
+        public async Task Update(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
-            _context.Entry<TEntity>(result).State = EntityState.Modified;
+            _uow.Update<TEntity>(result);
+            await _uow.SaveChangesAsync();
         }
 
         public async Task Delete(int id)
         {
-            var result = await _set.FindAsync(id);
-            _set.Remove(result);
+            var model = await GetByIdAsync(id);
+            var entity = AutoMapper.Mapper.Map<TEntity>(model);
+
+            _uow.Delete<TEntity>(entity);
+            await _uow.SaveChangesAsync();
         }
 
     }

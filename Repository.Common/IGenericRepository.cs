@@ -11,9 +11,9 @@ namespace Repository.Common
         where TModel : class
     {
         Task<TModel> GetByIdAsync(int id);
-        Task<List<TModel>> GetAllAsync();
-        void Create(TModel model);
-        void Update(TModel model);
+        Task<IList<TModel>> GetAllAsync();
+        Task Create(TModel model);
+        Task Update(TModel model);
         Task Delete(int id);
     }
 }

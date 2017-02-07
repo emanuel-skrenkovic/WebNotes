@@ -12,15 +12,14 @@ namespace Service
 {
     public class NoteService : INoteService
     {
-        private IUnitOfWork _unitOfWork;
         private IRepository<INote> _noteRepo;
         private IRepository<ICategory> _categoryRepo;
 
-        public NoteService(IUnitOfWork unitOfWork)
+        public NoteService(IRepository<INote> noteRepo, 
+            IRepository<ICategory> categoryRepo)
         {
-            _unitOfWork = unitOfWork;
-            _noteRepo = _unitOfWork.NoteRepository;
-            _categoryRepo = unitOfWork.CategoryRepository;
+            _noteRepo = noteRepo;
+            _categoryRepo = categoryRepo;
         }
 
         public async Task<INote> GetNoteByIdAsync(int id)
@@ -33,34 +32,34 @@ namespace Service
             return await _categoryRepo.GetByIdAsync(id);
         }
 
-        public async Task<List<INote>> GetNotesAsync()
+        public async Task<IList<INote>> GetNotesAsync()
         {
             return await _noteRepo.GetAllAsync();
         }
 
-        public async Task<List<ICategory>> GetCategoriesAsync()
+        public async Task<IList<ICategory>> GetCategoriesAsync()
         {
             return await _categoryRepo.GetAllAsync();
         }
 
-        public void CreateNote(INote model)
+        public async Task CreateNote(INote model)
         {
-            _noteRepo.Create(model);
+            await _noteRepo.Create(model);
         }
 
-        public void CreateCategory(ICategory model)
+        public async Task CreateCategory(ICategory model)
         {
-            _categoryRepo.Create(model);
+            await _categoryRepo.Create(model);
         }
 
-        public void UpdateNote(INote model)
+        public async Task UpdateNote(INote model)
         {
-            _noteRepo.Update(model);
+            await _noteRepo.Update(model);
         }
 
-        public void UpdateCategory(ICategory model)
+        public async Task UpdateCategory(ICategory model)
         {
-            _categoryRepo.Update(model);
+            await _categoryRepo.Update(model);
         }
 
         public async Task DeleteNote(int id)
@@ -71,11 +70,6 @@ namespace Service
         public async Task DeleteCategory(int id)
         {
             await _categoryRepo.Delete(id);
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

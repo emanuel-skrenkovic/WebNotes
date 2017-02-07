@@ -14,7 +14,7 @@ namespace Repository
         GenericRepository<CategoryEntity, ICategory>, 
         IRepository<ICategory>
     {
-        public CategoryRepository(INotesContext context) : base(context)
+        public CategoryRepository(IUnitOfWork uow) : base(uow)
         {
         }
     }
