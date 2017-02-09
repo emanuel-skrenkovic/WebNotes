@@ -11,8 +11,8 @@ namespace Service.Common
     {
         Task<INote> GetNoteByIdAsync(int id);
         Task<ICategory> GetCategoryByIdAsync(int id);
-        Task<IList<INote>> GetNotesAsync();
-        Task<IList<ICategory>> GetCategoriesAsync();
+        Task<IEnumerable<INote>> GetNotesAsync();
+        Task<IEnumerable<ICategory>> GetCategoriesAsync();
         Task CreateNote(INote model);
         Task CreateCategory(ICategory model);
         Task UpdateNote(INote model);

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,14 +24,15 @@ namespace Repository
             _context = context;
         }
 
-        public async Task<TEntity> GetByIdAsync<TEntity>(int id) where TEntity : class
+        public async Task<TEntity> Find<TEntity>(int id) where TEntity : class
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IList<TEntity>> GetAllAsync<TEntity>() where TEntity : class
+        public async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>() where TEntity : class
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            var result = await _context.Set<TEntity>().ToListAsync();
+            return result;
         }
 
         public void Add<TEntity>(TEntity entity) where TEntity : class

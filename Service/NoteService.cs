@@ -32,14 +32,14 @@ namespace Service
             return await _categoryRepo.GetByIdAsync(id);
         }
 
-        public async Task<IList<INote>> GetNotesAsync()
+        public async Task<IEnumerable<INote>> GetNotesAsync()
         {
-            return await _noteRepo.GetAllAsync();
+            return await _noteRepo.GetAsync();
         }
 
-        public async Task<IList<ICategory>> GetCategoriesAsync()
+        public async Task<IEnumerable<ICategory>> GetCategoriesAsync()
         {
-            return await _categoryRepo.GetAllAsync();
+            return await _categoryRepo.GetAsync();
         }
 
         public async Task CreateNote(INote model)

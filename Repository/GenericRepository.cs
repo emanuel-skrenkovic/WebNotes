@@ -1,8 +1,10 @@
-﻿using Repository.Common;
+﻿using PagedList;
+using Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,19 +24,39 @@ namespace Repository
 
         public async Task<TModel> GetByIdAsync(int id)
         {
-            var result = await _uow.GetByIdAsync<TEntity>(id);
+            var result = await _uow.Find<TEntity>(id);
             return AutoMapper.Mapper.Map<TModel>(result);
         }
-
-        public async Task<IList<TModel>> GetAllAsync()
+        
+        public async Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null)
         {
-            var result = await _uow.GetAllAsync<TEntity>();
-            return AutoMapper.Mapper.Map<IList<TModel>>(result);
+            var entities = await _uow.GetAllAsync<TEntity>();
+
+            if(filter != null)
+            {
+                var mappedFilter = AutoMapper.Mapper.Map<Expression<Func<TEntity, bool>>>(filter);
+                
+                entities = entities.AsQueryable().Where(mappedFilter);
+            }
+
+            var result = AutoMapper.Mapper.Map<IEnumerable<TModel>>(entities);
+
+            return result;
+        }
+
+        public async Task<IPagedList<TModel>> GetPagedResult(int pageNumber, int pageSize)
+        {
+            var entities = await _uow.GetAllAsync<TEntity>();
+            var result = AutoMapper.Mapper.Map<IEnumerable<TModel>>(entities)
+                .ToPagedList(pageNumber, pageSize);
+
+            return result;
         }
 
         public async Task Create(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
+
             _uow.Add(result);
             await _uow.SaveChangesAsync();
         }
@@ -42,6 +64,7 @@ namespace Repository
         public async Task Update(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
+
             _uow.Update<TEntity>(result);
             await _uow.SaveChangesAsync();
         }
