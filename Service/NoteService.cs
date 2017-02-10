@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Common;
+using PagedList;
 using Repository.Common;
 using Service.Common;
 using System;

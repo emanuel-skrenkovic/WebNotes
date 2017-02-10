@@ -13,8 +13,17 @@ namespace Repository.Common
         where TModel : class
     {
         Task<TModel> GetByIdAsync(int id);
+
         Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null);
-        Task<IPagedList<TModel>> GetPagedResult(int pageNumber, int pageSize);
+        Task<IEnumerable<TModel>> GetAsync<TKey>(Expression<Func<TModel, bool>> filter = null,
+            Expression<Func<TModel, TKey>> sort = null);
+
+        Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize, 
+            Expression<Func<TModel, bool>> filter = null);
+        Task<IPagedList<TModel>> GetPagedAsync<TKey>(int pageNumber, int pageSize,
+            Expression<Func<TModel, bool>> filter = null,
+            Expression<Func<TModel, TKey>> sort = null);
+
         Task Create(TModel model);
         Task Update(TModel model);
         Task Delete(int id);
