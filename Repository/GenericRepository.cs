@@ -30,9 +30,12 @@ namespace Repository
         
         public async Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null)
         {
-            var entities = await _uow.GetAllAsync<TEntity>();
+            var entities = await _uow.List<TEntity>();
 
-            entities = Filter(entities, filter);
+            if(filter != null)
+            {
+                entities = Filter(entities, filter);
+            }
 
             var result = AutoMapper.Mapper.Map<IEnumerable<TModel>>(entities);
 
@@ -43,7 +46,7 @@ namespace Repository
             Expression<Func<TModel, TKey>> sort = null,
             bool descending = false)
         {
-            var entities = await _uow.GetAllAsync<TEntity>();
+            var entities = await _uow.List<TEntity>();
 
             if(filter != null)
             {
@@ -63,7 +66,7 @@ namespace Repository
         public async Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize, 
             Expression<Func<TModel, bool>> filter = null)
         {
-            var entities = await _uow.GetAllAsync<TEntity>();
+            var entities = await _uow.List<TEntity>();
 
             if(filter != null)
             {
@@ -81,7 +84,7 @@ namespace Repository
             Expression<Func<TModel, TKey>> sort = null,
             bool descending = false)
         {
-            var entities = await _uow.GetAllAsync<TEntity>();
+            var entities = await _uow.List<TEntity>();
 
             if(filter != null)
             {
@@ -128,7 +131,9 @@ namespace Repository
             Expression<Func<TModel, bool>> filter = null)
         {
             var mappedFilter = AutoMapper.Mapper.Map<Expression<Func<TEntity, bool>>>(filter);
-            return entities.AsQueryable().Where(mappedFilter);
+            var mappedEntities = entities.AsQueryable().Where(mappedFilter);
+
+            return mappedEntities.AsEnumerable();
         }
 
         protected IEnumerable<TEntity> Sort<TKey>(IEnumerable<TEntity> entities, 
@@ -139,11 +144,13 @@ namespace Repository
 
             if (descending)
             {
-                return entities.AsQueryable().OrderByDescending(mappedSort);
+                var mappedEntities = entities.AsQueryable().OrderByDescending(mappedSort);
+                return mappedEntities.AsEnumerable();
             }
             else
             {
-                return entities.AsQueryable().OrderBy(mappedSort);
+                var mappedEntities = entities.AsQueryable().OrderBy(mappedSort);
+                return mappedEntities.AsEnumerable();
             }
         }
 

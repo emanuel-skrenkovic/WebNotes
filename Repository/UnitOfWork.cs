@@ -29,7 +29,7 @@ namespace Repository
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>() where TEntity : class
+        public async Task<IEnumerable<TEntity>> List<TEntity>() where TEntity : class
         {
             var result = await _context.Set<TEntity>().ToListAsync();
             return result;
