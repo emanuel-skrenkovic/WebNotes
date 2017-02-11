@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        public async Task<IHttpActionResult> Get(int pageNumber, int pageSize)
+        {
+            var result = await _service.GetPagedNotesAsync(pageNumber, pageSize);
+            return Ok(result);
+        }
+
         // GET api/values/5
         public async Task<IHttpActionResult> Get(int id)
         {

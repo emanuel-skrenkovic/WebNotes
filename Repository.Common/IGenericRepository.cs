@@ -16,13 +16,15 @@ namespace Repository.Common
 
         Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null);
         Task<IEnumerable<TModel>> GetAsync<TKey>(Expression<Func<TModel, bool>> filter = null,
-            Expression<Func<TModel, TKey>> sort = null);
+            Expression<Func<TModel, TKey>> sort = null,
+            bool descending = false);
 
         Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize, 
             Expression<Func<TModel, bool>> filter = null);
         Task<IPagedList<TModel>> GetPagedAsync<TKey>(int pageNumber, int pageSize,
             Expression<Func<TModel, bool>> filter = null,
-            Expression<Func<TModel, TKey>> sort = null);
+            Expression<Func<TModel, TKey>> sort = null,
+            bool descending = false);
 
         Task Create(TModel model);
         Task Update(TModel model);
