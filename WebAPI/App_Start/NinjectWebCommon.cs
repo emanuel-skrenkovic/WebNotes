@@ -10,8 +10,10 @@ namespace WebAPI.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using Common.Ninject;
-    using Common;
+    using Repository.Ninject;
+    using DAL.Ninject;
+    using Model.Ninject;
+    using Service.Ninject;
 
     public static class NinjectWebCommon 
     {
@@ -63,7 +65,7 @@ namespace WebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Load<AutoMapperModule>();
+            //kernel.Load<AutoMapperModule>();
             kernel.Load<DalModule>();
             kernel.Load<ModelModule>();
             kernel.Load<RepositoryModule>();

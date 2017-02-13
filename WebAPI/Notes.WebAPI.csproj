@@ -288,13 +288,29 @@
       <Project>{d5439a2c-1d49-42ea-91e7-272dba313372}</Project>
       <Name>Notes.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\Notes.DAL.csproj">
+      <Project>{d26a6c71-7f14-4f34-85fa-983de44770a0}</Project>
+      <Name>Notes.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model.Common\Notes.Model.Common.csproj">
       <Project>{03e68f57-bfaa-4fa2-8119-3d3f95187fe9}</Project>
       <Name>Notes.Model.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Notes.Model.csproj">
+      <Project>{c2f8e260-2c4c-4d68-bf82-2fa1635026ec}</Project>
+      <Name>Notes.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Notes.Repository.csproj">
+      <Project>{4e619d10-6f82-44f3-813a-8f8f5cbce016}</Project>
+      <Name>Notes.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service.Common\Notes.Service.Common.csproj">
       <Project>{72d0dcdc-8781-45ca-8b4a-d68b21f53a0f}</Project>
       <Name>Notes.Service.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Notes.Service.csproj">
+      <Project>{0ec1b2fb-be8f-4ef0-9ec9-0b9a6e94ed0f}</Project>
+      <Name>Notes.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

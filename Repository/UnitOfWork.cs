@@ -29,10 +29,9 @@ namespace Repository
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<TEntity>> List<TEntity>() where TEntity : class
+        public IQueryable<TEntity> Entities<TEntity>() where TEntity : class
         {
-            var result = await _context.Set<TEntity>().ToListAsync();
-            return result;
+            return _context.Set<TEntity>().AsQueryable();
         }
 
         public void Add<TEntity>(TEntity entity) where TEntity : class

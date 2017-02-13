@@ -11,7 +11,7 @@ namespace Repository.Common
     public interface IUnitOfWork : IDisposable
     {
         Task<TEntity> Find<TEntity>(int id) where TEntity : class;
-        Task<IEnumerable<TEntity>> List<TEntity>() where TEntity : class;
+        IQueryable<TEntity> Entities<TEntity>() where TEntity : class;
 
         void Add<TEntity>(TEntity entity) where TEntity : class;
         void Update<TEntity>(TEntity entity) where TEntity : class;

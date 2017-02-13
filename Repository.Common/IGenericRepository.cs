@@ -14,17 +14,17 @@ namespace Repository.Common
     {
         Task<TModel> GetByIdAsync(int id);
 
-        Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null);
-        Task<IEnumerable<TModel>> GetAsync<TKey>(Expression<Func<TModel, bool>> filter = null,
+        Task<IList<TModel>> GetAsync(Expression<Func<TModel, bool>> filter = null);
+        Task<IList<TModel>> GetAsync<TKey>(Expression<Func<TModel, bool>> filter = null,
             Expression<Func<TModel, TKey>> sort = null,
-            bool descending = false);
+            bool desc = false);
 
-        Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize, 
+        Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize,
             Expression<Func<TModel, bool>> filter = null);
         Task<IPagedList<TModel>> GetPagedAsync<TKey>(int pageNumber, int pageSize,
             Expression<Func<TModel, bool>> filter = null,
             Expression<Func<TModel, TKey>> sort = null,
-            bool descending = false);
+            bool desc = false);
 
         Task Create(TModel model);
         Task Update(TModel model);

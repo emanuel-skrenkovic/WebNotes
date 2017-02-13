@@ -45,7 +45,7 @@ namespace Service
 
         public async Task<IPagedList<INote>> GetPagedNotesAsync(int pageNumber, int pageSize)
         {
-            return await _noteRepo.GetPagedAsync(pageNumber, pageSize);
+            return await _noteRepo.GetPagedAsync(pageNumber, pageSize, sort: x => x.Id, desc: true);
         }
 
         public async Task<IPagedList<INote>> GetPagedCategoriesAsync(int pageNumber, int pageSize)
