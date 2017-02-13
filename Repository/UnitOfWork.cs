@@ -24,7 +24,7 @@ namespace Repository
             _context = context;
         }
 
-        public async Task<TEntity> Find<TEntity>(int id) where TEntity : class
+        public async Task<TEntity> FindAsync<TEntity>(int id) where TEntity : class
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }

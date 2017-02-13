@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
         // DELETE: api/Categories/5
         public void Delete(int id)
         {
-            _service.DeleteCategory(id);
+            _service.DeleteCategoryAsync(id);
         }
     }
 }

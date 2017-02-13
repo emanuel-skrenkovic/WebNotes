@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
         // POST api/values
         public IHttpActionResult Post([FromBody]INote value)
         {
-            _service.CreateNote(value);
+            _service.CreateNoteAsync(value);
             return Ok();
         }
 
@@ -56,14 +56,14 @@ namespace WebAPI.Controllers
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
             }
 
-            await _service.UpdateNote(value);
+            await _service.UpdateNoteAsync(value);
             return Ok();
         }
 
         // DELETE api/values/5
         public HttpResponseMessage Delete(int id)
         {
-            _service.DeleteNote(id);
+            _service.DeleteNoteAsync(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }

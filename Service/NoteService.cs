@@ -53,34 +53,34 @@ namespace Service
             return await _noteRepo.GetPagedAsync(pageNumber, pageSize);
         }
 
-        public async Task CreateNote(INote model)
+        public async Task CreateNoteAsync(INote model)
         {
-            await _noteRepo.Create(model);
+            await _noteRepo.CreateAsync(model);
         }
 
-        public async Task CreateCategory(ICategory model)
+        public async Task CreateCategoryAsync(ICategory model)
         {
-            await _categoryRepo.Create(model);
+            await _categoryRepo.CreateAsync(model);
         }
 
-        public async Task UpdateNote(INote model)
+        public async Task UpdateNoteAsync(INote model)
         {
-            await _noteRepo.Update(model);
+            await _noteRepo.UpdateAsync(model);
         }
 
-        public async Task UpdateCategory(ICategory model)
+        public async Task UpdateCategoryAsync(ICategory model)
         {
-            await _categoryRepo.Update(model);
+            await _categoryRepo.UpdateAsync(model);
         }
 
-        public async Task DeleteNote(int id)
+        public async Task DeleteNoteAsync(int id)
         {
-            await _noteRepo.Delete(id);
+            await _noteRepo.DeleteAsync(id);
         }
 
-        public async Task DeleteCategory(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
-            await _categoryRepo.Delete(id);
+            await _categoryRepo.DeleteAsync(id);
         }
     }
 }

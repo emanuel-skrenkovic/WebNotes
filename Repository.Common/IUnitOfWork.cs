@@ -10,7 +10,7 @@ namespace Repository.Common
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<TEntity> Find<TEntity>(int id) where TEntity : class;
+        Task<TEntity> FindAsync<TEntity>(int id) where TEntity : class;
         IQueryable<TEntity> Entities<TEntity>() where TEntity : class;
 
         void Add<TEntity>(TEntity entity) where TEntity : class;

@@ -26,8 +26,8 @@ namespace Repository.Common
             Expression<Func<TModel, TKey>> sort = null,
             bool desc = false);
 
-        Task Create(TModel model);
-        Task Update(TModel model);
-        Task Delete(int id);
+        Task CreateAsync(TModel model);
+        Task UpdateAsync(TModel model);
+        Task DeleteAsync(int id);
     }
 }

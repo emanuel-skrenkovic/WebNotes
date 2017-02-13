@@ -25,7 +25,7 @@ namespace Repository
 
         public async Task<TModel> GetByIdAsync(int id)
         {
-            var result = await _uow.Find<TEntity>(id);
+            var result = await _uow.FindAsync<TEntity>(id);
             return AutoMapper.Mapper.Map<TModel>(result);
         }
         
@@ -86,7 +86,7 @@ namespace Repository
             return models.ToPagedList(pageNumber, pageSize);
         }
 
-        public async Task Create(TModel model)
+        public async Task CreateAsync(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
 
@@ -94,7 +94,7 @@ namespace Repository
             await _uow.SaveChangesAsync();
         }
 
-        public async Task Update(TModel model)
+        public async Task UpdateAsync(TModel model)
         {
             var result = AutoMapper.Mapper.Map<TEntity>(model);
 
@@ -102,7 +102,7 @@ namespace Repository
             await _uow.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var model = await GetByIdAsync(id);
             var entity = AutoMapper.Mapper.Map<TEntity>(model);

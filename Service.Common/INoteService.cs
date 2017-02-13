@@ -19,13 +19,13 @@ namespace Service.Common
         Task<IPagedList<INote>> GetPagedNotesAsync(int pageNumber, int pageSize);
         Task<IPagedList<INote>> GetPagedCategoriesAsync(int pageNumber, int pageSize);
 
-        Task CreateNote(INote model);
-        Task CreateCategory(ICategory model);
+        Task CreateNoteAsync(INote model);
+        Task CreateCategoryAsync(ICategory model);
 
-        Task UpdateNote(INote model);
-        Task UpdateCategory(ICategory model);
+        Task UpdateNoteAsync(INote model);
+        Task UpdateCategoryAsync(ICategory model);
 
-        Task DeleteNote(int id);
-        Task DeleteCategory(int id);
+        Task DeleteNoteAsync(int id);
+        Task DeleteCategoryAsync(int id);
     }
 }
