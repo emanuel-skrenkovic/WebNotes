@@ -13,8 +13,7 @@ namespace Repository.Mapping
     {
         public CategoryMapperProfile()
         {
-            CreateMap<ICategory, CategoryEntity>();
-            CreateMap<CategoryEntity, ICategory>();
+            CreateMap<ICategory, CategoryEntity>().ReverseMap();
         }
     }
 }

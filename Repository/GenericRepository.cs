@@ -33,9 +33,15 @@ namespace Repository
         {
             var entities = _uow.Entities<TEntity>();
 
-            entities = (filter != null) ? FilterEntities(entities, filter) : entities;
+            if(filter != null)
+            {
+                var mappedFilter = AutoMapper.Mapper.Map<Expression<Func<TEntity, bool>>>(filter);
+                entities = entities.Where(mappedFilter);
+            }
 
-            return await MapToModelsList(entities);
+            var entitiesList = await entities.ToListAsync();
+
+            return AutoMapper.Mapper.Map<IList<TModel>>(entitiesList);
         }
 
         public async Task<IList<TModel>> GetAsync<TKey>(Expression<Func<TModel, bool>> filter = null,
@@ -44,19 +50,28 @@ namespace Repository
         {
             var entities = _uow.Entities<TEntity>();
 
-            entities = (filter != null) ? FilterEntities(entities, filter) : entities;
-            entities = (sort != null) ? SortEntities(entities, sort, desc) : entities;
+            if(filter != null)
+            {
+                var mappedFilter = AutoMapper.Mapper.Map<Expression<Func<TEntity, bool>>>(filter);
+                entities = entities.Where(mappedFilter);
+            }
 
-            return await MapToModelsList(entities);
+            if(sort != null)
+            {
+                var mappedSort = AutoMapper.Mapper.Map<Expression<Func<TEntity, TKey>>>(sort);
+                entities = (desc) ? entities.OrderByDescending(mappedSort)
+                                  : entities.OrderBy(mappedSort);
+            }
+
+            var entitiesList = await entities.ToListAsync();
+
+            return AutoMapper.Mapper.Map<IList<TModel>>(entitiesList);
         }
 
         public async Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize, 
             Expression<Func<TModel, bool>> filter = null)
         {
-            var entities = _uow.Entities<TEntity>();
-
-            entities = (filter != null) ? FilterEntities(entities, filter) : entities;
-            var models = await MapToModelsList(entities);
+            var models = await GetAsync(filter);
 
             return models.ToPagedList(pageNumber, pageSize);
         }
@@ -66,12 +81,7 @@ namespace Repository
             Expression<Func<TModel, TKey>> sort = null,
             bool desc = false)
         {
-            var entities = _uow.Entities<TEntity>();
-
-            entities = (filter != null) ? FilterEntities(entities, filter) : entities;
-            entities = (sort != null) ? SortEntities(entities, sort, desc) : entities;
-
-            var models = await MapToModelsList(entities);
+            var models = await GetAsync(filter, sort, desc);
 
             return models.ToPagedList(pageNumber, pageSize);
         }
@@ -99,30 +109,6 @@ namespace Repository
 
             _uow.Delete(entity);
             await _uow.SaveChangesAsync();
-        }
-
-        protected IQueryable<TEntity> FilterEntities(IQueryable<TEntity> entities, 
-            Expression<Func<TModel, bool>> filter = null)
-        {
-            var mappedFilter = AutoMapper.Mapper.Map<Expression<Func<TEntity, bool>>>(filter);
-
-            return entities.Where(mappedFilter);
-        }
-
-        protected IQueryable<TEntity> SortEntities<TKey>(IQueryable<TEntity> entities,    
-            Expression<Func<TModel, TKey>> sort = null, 
-            bool desc = false)
-        {
-            var mappedSort = AutoMapper.Mapper.Map<Expression<Func<TEntity, TKey>>>(sort);
-
-            return (desc) ? entities.OrderByDescending(mappedSort)
-                          : entities.OrderBy(mappedSort);
-        }
-
-        protected async Task<IList<TModel>> MapToModelsList(IQueryable<TEntity> entities)
-        {
-            var entitiesList = await entities.ToListAsync();
-            return AutoMapper.Mapper.Map<IList<TModel>>(entitiesList);
         }
     }
 }

@@ -11,7 +11,7 @@ using AutoMapper;
 using Ninject;
 using Repository.Mapping;
 
-namespace Repository.Ninject
+namespace Repository.DependencyInjection
 {
     public class RepositoryModule : NinjectModule
     {

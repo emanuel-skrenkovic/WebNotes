@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Ninject
+namespace Service.DependencyInjection
 {
     public class ServiceModule : NinjectModule
     {

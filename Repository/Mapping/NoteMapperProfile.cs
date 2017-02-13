@@ -13,8 +13,7 @@ namespace Repository.Mapping
     {
         public NoteMapperProfile()
         {
-            CreateMap<INote, NoteEntity>();
-            CreateMap<NoteEntity, INote>();
+            CreateMap<INote, NoteEntity>().ReverseMap();
         }
     }
 }

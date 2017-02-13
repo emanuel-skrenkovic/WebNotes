@@ -1,5 +1,4 @@
-﻿using Model;
-using Model.Common;
+﻿using DAL;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -7,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Ninject
+namespace DAL.DependencyInjection
 {
-    public class ModelModule : NinjectModule
+    public class DalModule : NinjectModule
     {
         public override void Load()
         {
-            Bind<INote>().To<Note>();
+            Bind<INotesContext>().To<NotesContext>();
         }
     }
 }
