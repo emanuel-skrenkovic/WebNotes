@@ -7,9 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class NotesController : ApiController
     {
         private INoteService _service;
@@ -40,9 +42,14 @@ namespace WebAPI.Controllers
         }
 
         // POST api/values
-        public IHttpActionResult Post([FromBody]INote value)
+        public async Task<IHttpActionResult> Post([FromBody]INote value)
         {
-            _service.CreateNoteAsync(value);
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatus‌​Code.BadRequest, this.ModelState));
+            }
+
+            await _service.CreateNoteAsync(value);
             return Ok();
         }
 
@@ -61,10 +68,10 @@ namespace WebAPI.Controllers
         }
 
         // DELETE api/values/5
-        public HttpResponseMessage Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            _service.DeleteNoteAsync(id);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            await _service.DeleteNoteAsync(id);
+            return Ok();
         }
     }
 }

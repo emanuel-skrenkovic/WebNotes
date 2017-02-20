@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class NoteRepository : GenericRepository<NoteEntity, INote>, IRepository<INote>
+    public class NoteRepository : GenericRepository<NoteEntity, INote>, INoteRepository
     {
         public NoteRepository(IUnitOfWork uow) : base(uow)
         {

@@ -24,9 +24,9 @@ namespace Repository
             _context = context;
         }
 
-        public async Task<TEntity> FindAsync<TEntity>(int id) where TEntity : class
+        public Task<TEntity> FindAsync<TEntity>(int id) where TEntity : class
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+            return _context.Set<TEntity>().FindAsync(id);
         }
 
         public IQueryable<TEntity> Entities<TEntity>() where TEntity : class
@@ -49,9 +49,9 @@ namespace Repository
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public async Task SaveChangesAsync()
+        public Task SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            return _context.SaveChangesAsync();
         }
 
         public void Dispose()

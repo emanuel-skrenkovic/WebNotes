@@ -17,8 +17,8 @@ namespace Repository.DependencyInjection
     {
         public override void Load()
         {
-            Bind(typeof(IRepository<INote>)).To(typeof(NoteRepository));
-            Bind(typeof(IRepository<ICategory>)).To(typeof(CategoryRepository));
+            Bind<INoteRepository>().To<NoteRepository>();
+            Bind<ICategoryRepository>().To<CategoryRepository>();
             Bind<IUnitOfWork>().To<UnitOfWork>();
 
             Mapper.Initialize(cfg =>

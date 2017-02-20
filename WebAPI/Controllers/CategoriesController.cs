@@ -7,9 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CategoriesController : ApiController
     {
         private INoteService _service;
@@ -20,15 +22,15 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Categories
-        public async Task<IEnumerable<ICategory>> Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return await _service.GetCategoriesAsync();
+            return Ok(await _service.GetCategoriesAsync());
         }
 
         // GET: api/Categories/5
-        public async Task<ICategory> Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return await _service.GetCategoryByIdAsync(id);
+            return Ok(await _service.GetCategoryByIdAsync(id));
         }
 
         // POST: api/Categories
@@ -37,14 +39,24 @@ namespace WebAPI.Controllers
         }
 
         // PUT: api/Categories/5
-        public void Put(int id, [FromBody]string value)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]string value)
         {
+            var category = await _service.GetCategoryByIdAsync(id);
+
+            if (category == null)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+            }
+
+            await _service.UpdateCategoryAsync(category);
+            return Ok();
         }
 
         // DELETE: api/Categories/5
-        public void Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            _service.DeleteCategoryAsync(id);
+            await _service.DeleteNoteAsync(id);
+            return Ok();
         }
     }
 }

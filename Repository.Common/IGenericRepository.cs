@@ -1,5 +1,4 @@
-﻿using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,9 +18,9 @@ namespace Repository.Common
             Expression<Func<TModel, TKey>> sort = null,
             bool desc = false);
 
-        Task<IPagedList<TModel>> GetPagedAsync(int pageNumber, int pageSize,
+        Task<IList<TModel>> GetPagedAsync(int pageNumber, int pageSize,
             Expression<Func<TModel, bool>> filter = null);
-        Task<IPagedList<TModel>> GetPagedAsync<TKey>(int pageNumber, int pageSize,
+        Task<IList<TModel>> GetPagedAsync<TKey>(int pageNumber, int pageSize,
             Expression<Func<TModel, bool>> filter = null,
             Expression<Func<TModel, TKey>> sort = null,
             bool desc = false);

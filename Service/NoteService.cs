@@ -1,6 +1,5 @@
 ﻿using Model;
 using Model.Common;
-using PagedList;
 using Repository.Common;
 using Service.Common;
 using System;
@@ -13,74 +12,74 @@ namespace Service
 {
     public class NoteService : INoteService
     {
-        private IRepository<INote> _noteRepo;
-        private IRepository<ICategory> _categoryRepo;
+        private INoteRepository _noteRepo;
+        private ICategoryRepository _categoryRepo;
 
-        public NoteService(IRepository<INote> noteRepo, 
-            IRepository<ICategory> categoryRepo)
+        public NoteService(INoteRepository noteRepo, 
+            ICategoryRepository categoryRepo)
         {
             _noteRepo = noteRepo;
             _categoryRepo = categoryRepo;
         }
 
-        public async Task<INote> GetNoteByIdAsync(int id)
+        public Task<INote> GetNoteByIdAsync(int id)
         {
-            return await _noteRepo.GetByIdAsync(id);
+            return _noteRepo.GetByIdAsync(id);
         }
 
-        public async Task<ICategory> GetCategoryByIdAsync(int id)
+        public Task<ICategory> GetCategoryByIdAsync(int id)
         {
-            return await _categoryRepo.GetByIdAsync(id);
+            return _categoryRepo.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<INote>> GetNotesAsync()
+        public Task<IList<INote>> GetNotesAsync()
         {
-            return await _noteRepo.GetAsync();
+            return _noteRepo.GetAsync();
         }
 
-        public async Task<IEnumerable<ICategory>> GetCategoriesAsync()
+        public Task<IList<ICategory>> GetCategoriesAsync()
         {
-            return await _categoryRepo.GetAsync();
+            return _categoryRepo.GetAsync();
         }
 
-        public async Task<IPagedList<INote>> GetPagedNotesAsync(int pageNumber, int pageSize)
+        public Task<IList<INote>> GetPagedNotesAsync(int pageNumber, int pageSize)
         {
-            return await _noteRepo.GetPagedAsync(pageNumber, pageSize);
+            return _noteRepo.GetPagedAsync(pageNumber, pageSize);
         }
 
-        public async Task<IPagedList<INote>> GetPagedCategoriesAsync(int pageNumber, int pageSize)
+        public Task<IList<INote>> GetPagedCategoriesAsync(int pageNumber, int pageSize)
         {
-            return await _noteRepo.GetPagedAsync(pageNumber, pageSize);
+            return _noteRepo.GetPagedAsync(pageNumber, pageSize);
         }
 
-        public async Task CreateNoteAsync(INote model)
+        public Task CreateNoteAsync(INote model)
         {
-            await _noteRepo.CreateAsync(model);
+            return _noteRepo.CreateAsync(model);
         }
 
-        public async Task CreateCategoryAsync(ICategory model)
+        public Task CreateCategoryAsync(ICategory model)
         {
-            await _categoryRepo.CreateAsync(model);
+            return _categoryRepo.CreateAsync(model);
         }
 
-        public async Task UpdateNoteAsync(INote model)
+        public Task UpdateNoteAsync(INote model)
         {
-            await _noteRepo.UpdateAsync(model);
+            return _noteRepo.UpdateAsync(model);
         }
 
-        public async Task UpdateCategoryAsync(ICategory model)
+        public Task UpdateCategoryAsync(ICategory model)
         {
-            await _categoryRepo.UpdateAsync(model);
+            return _categoryRepo.UpdateAsync(model);
         }
 
-        public async Task DeleteNoteAsync(int id)
+        public Task DeleteNoteAsync(int id)
         {
-            await _noteRepo.DeleteAsync(id);
+            return _noteRepo.DeleteAsync(id);
         }
 
-        public async Task DeleteCategoryAsync(int id)
+        public Task DeleteCategoryAsync(int id)
         {
-            await _categoryRepo.DeleteAsync(id);
+            return _categoryRepo.DeleteAsync(id);
         }
     }
 }

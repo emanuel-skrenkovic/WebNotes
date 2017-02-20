@@ -12,7 +12,7 @@ namespace Repository
 {
     public class CategoryRepository : 
         GenericRepository<CategoryEntity, ICategory>, 
-        IRepository<ICategory>
+        ICategoryRepository
     {
         public CategoryRepository(IUnitOfWork uow) : base(uow)
         {
